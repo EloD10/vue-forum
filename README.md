@@ -1,6 +1,8 @@
 # vue-forum
 
 My training forum with Laravel 5.6 VueJS 2.5.13.
+
+
 It's still in alpha stage, there is nothing very interesting. :punch:
 
 ## Setup
@@ -20,4 +22,11 @@ php artisan migrate
 php artisan db:seed
 ```
 
-You can launch the server with `php artisan serve`. You can see existing routes in the routes folder, try for example to go on the `/forum` route. Enjoy!  :sunglasses:
+You can launch the server with `php artisan serve`. You can see existing routes in the routes folder, try for example to go on the `/forum` route. 
+
+Now, you need to run the frontend : 
+```
+npm run hot # or yarn watch
+```
+
+Enjoy!  :sunglasses:
