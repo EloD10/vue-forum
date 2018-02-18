@@ -14927,7 +14927,7 @@ if (false) {
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = null
+var __vue_script__ = __webpack_require__(50)
 /* template */
 var __vue_template__ = __webpack_require__(20)
 /* template functional */
@@ -14994,7 +14994,7 @@ if (false) {
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = null
+var __vue_script__ = __webpack_require__(51)
 /* template */
 var __vue_template__ = __webpack_require__(22)
 /* template functional */
@@ -15138,8 +15138,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -16112,21 +16111,19 @@ var render = function() {
               var created_at = ref.created_at
               var updated_at = ref.updated_at
               return _c(
-                "li",
+                "a",
                 {
                   key: name,
                   staticClass: "list-group-item list-group-item-action"
                 },
                 [
-                  _c("button", { attrs: { href: "#" } }, [
-                    _vm._v(" \n            Name: "),
-                    _c("strong", [_vm._v(_vm._s(name))]),
-                    _vm._v(",\n            Created at: "),
-                    _c("strong", [_vm._v(_vm._s(created_at.date))]),
-                    _vm._v(",\n            Updated at:"),
-                    _c("strong", [_vm._v(_vm._s(updated_at.date))]),
-                    _vm._v(",\n            ")
-                  ])
+                  _vm._v("\n            Name: "),
+                  _c("strong", [_vm._v(_vm._s(name))]),
+                  _vm._v(",\n            Created at: "),
+                  _c("strong", [_vm._v(_vm._s(created_at.date))]),
+                  _vm._v(",\n            Updated at:"),
+                  _c("strong", [_vm._v(_vm._s(updated_at.date))]),
+                  _vm._v(",\n        ")
                 ]
               )
             })
@@ -16151,6 +16148,36 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 46 */,
+/* 47 */,
+/* 48 */,
+/* 49 */,
+/* 50 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({});
+
+/***/ }),
+/* 51 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ })
 /******/ ]);

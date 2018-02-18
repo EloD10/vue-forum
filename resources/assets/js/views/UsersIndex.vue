@@ -16,13 +16,11 @@
         
         <ul v-if="users" class="list-group">
             <li class="list-group-item active"> Members's list</li>
-            <li v-for="{ name, email, created_at, updated_at} in users" :key="name" class="list-group-item list-group-item-action">
-               <button href="#"> 
+            <a v-for="{ name, email, created_at, updated_at} in users" :key="name" class="list-group-item list-group-item-action">
                 Name: <strong>{{ name }}</strong>,
                 Created at: <strong>{{ created_at.date }}</strong>,
                 Updated at:<strong>{{ updated_at.date }}</strong>,
-                </button>
-            </li>
+            </a>
         </ul>
 
 
@@ -31,6 +29,7 @@
 
 <script>
 import axios from 'axios';
+
 export default {
     data() {
         return {
