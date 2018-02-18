@@ -1,6 +1,6 @@
 # vue-forum
 
-My training forum with Laravel 5.6 VueJS 2.5.13
+My training forum with Laravel 5.6 VueJS 2.5.13.
 It's still in alpha stage, there is nothing very interesting. :punch:
 
 ## Setup
