@@ -13,15 +13,25 @@
                 </button>
             </p>
         </div>
-        
-        <ul v-if="users" class="list-group">
-            <li class="list-group-item active"> Members's list</li>
-            <a v-for="{ name, email, created_at, updated_at} in users" :key="name" class="list-group-item list-group-item-action">
-                Name: <strong>{{ name }}</strong>,
-                Created at: <strong>{{ created_at.date }}</strong>,
-                Updated at:<strong>{{ updated_at.date }}</strong>,
-            </a>
-        </ul>
+
+        <table v-if="users" class="table table-striped">
+            <thead>
+                <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Created at</th>
+                <th scope="col">Updated at</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="({ name, created_at, updated_at}, index) in users" :key="index">
+                <th scope="row">{{index + 1}}</th>
+                <td>{{ name }}</td>
+                <td>{{ created_at.date }}</td>
+                <td>{{ updated_at.date }}</td>
+                </tr>
+            </tbody>
+        </table>
 
         <nav>
             <ul class="pagination mt-2 justify-content-center">
@@ -57,6 +67,7 @@ export default {
                 .then(response => {
                     this.loading = false
                     this.users = response.data.data
+                    console.log(response.data)
                 }).catch(error => {
                     this.loading = false
                     this.error = error.response.data.message
