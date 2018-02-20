@@ -15184,6 +15184,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -15195,8 +15199,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             loading: false,
             users: null,
             error: null,
-            buttonIsActivePrev: false,
-            buttonIsActiveNext: false
+            paginate: {
+                buttonIsActivePrev: false,
+                buttonIsDisabledPrev: false,
+                buttonIsActiveNext: false,
+                buttonIsDisabledNext: false
+            }
         };
     },
     created: function created() {
@@ -15238,19 +15246,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         isDisabledNext: function isDisabledNext() {
             if (this.users.links.next) {
-                this.buttonIsActiveNext = true;
+                this.paginate.buttonIsDisabledNext = false;
+                this.paginate.buttonIsActiveNext = true;
                 return false;
             } else {
-                this.buttonIsActiveNext = false;
+                this.paginate.buttonIsDisabledNext = true;
                 return true;
             }
         },
         isDisabledPrev: function isDisabledPrev() {
             if (this.users.links.prev) {
-                this.buttonIsActivePrev = true;
+                this.paginate.buttonIsDisabledPrev = false;
+                this.paginate.buttonIsActivePrev = true;
                 return false;
             } else {
-                this.buttonIsActivePrev = false;
+                this.paginate.buttonIsDisabledPrev = true;
                 return true;
             }
         }
@@ -16230,39 +16240,61 @@ var render = function() {
     _vm.users
       ? _c("nav", [
           _c("ul", { staticClass: "pagination mt-2 justify-content-center" }, [
-            _vm.users
-              ? _c(
-                  "button",
-                  {
-                    class: { "page-link": _vm.buttonIsActivePrev },
-                    attrs: { disabled: _vm.isDisabledPrev },
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        _vm.loadBack($event)
-                      }
-                    }
-                  },
-                  [_vm._v("Prev")]
-                )
-              : _vm._e(),
+            _c(
+              "li",
+              {
+                class: {
+                  "page-item": _vm.paginate.buttonIsActivePrev,
+                  "page-item disabled": _vm.paginate.buttonIsDisabledPrev
+                }
+              },
+              [
+                _vm.users
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "page-link",
+                        attrs: { disabled: _vm.isDisabledPrev },
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            _vm.loadBack($event)
+                          }
+                        }
+                      },
+                      [_vm._v("Prev")]
+                    )
+                  : _vm._e()
+              ]
+            ),
             _vm._v(" "),
-            _vm.users
-              ? _c(
-                  "button",
-                  {
-                    class: { "page-link": _vm.buttonIsActiveNext },
-                    attrs: { disabled: _vm.isDisabledNext },
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        _vm.loadMore($event)
-                      }
-                    }
-                  },
-                  [_vm._v("Next")]
-                )
-              : _vm._e()
+            _c(
+              "li",
+              {
+                class: {
+                  "page-item": _vm.paginate.buttonIsActiveNext,
+                  "page-item disabled": _vm.paginate.buttonIsDisabledNext
+                }
+              },
+              [
+                _vm.users
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "page-link",
+                        attrs: { disabled: _vm.isDisabledNext },
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            _vm.loadMore($event)
+                          }
+                        }
+                      },
+                      [_vm._v("Next")]
+                    )
+                  : _vm._e()
+              ]
+            )
           ])
         ])
       : _vm._e()

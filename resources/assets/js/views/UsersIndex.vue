@@ -35,8 +35,12 @@
 
         <nav v-if="users">
             <ul class="pagination mt-2 justify-content-center">
-                <button v-if="users" @click.prevent="loadBack" :class="{'page-link': buttonIsActivePrev}" :disabled="isDisabledPrev">Prev</button>
-                <button v-if="users" @click.prevent="loadMore" :class="{'page-link': buttonIsActiveNext}" :disabled="isDisabledNext">Next</button>
+            <li :class="{'page-item': paginate.buttonIsActivePrev, 'page-item disabled': paginate.buttonIsDisabledPrev}">
+                <button v-if="users" @click.prevent="loadBack" class="page-link" :disabled="isDisabledPrev">Prev</button>
+            </li>
+            <li :class="{'page-item': paginate.buttonIsActiveNext, 'page-item disabled': paginate.buttonIsDisabledNext}">
+                <button v-if="users" @click.prevent="loadMore" class="page-link" :disabled="isDisabledNext">Next</button>
+            </li>
             </ul>
         </nav>
 
@@ -54,8 +58,12 @@ export default {
             loading: false,
             users: null,
             error: null,
-            buttonIsActivePrev: false,
-            buttonIsActiveNext: false
+            paginate: {
+                buttonIsActivePrev: false, 
+                buttonIsDisabledPrev: false,
+                buttonIsActiveNext: false,
+                buttonIsDisabledNext: false
+            }    
         };
     },
     created() {
@@ -96,19 +104,21 @@ export default {
         },
         isDisabledNext() {
             if (this.users.links.next) {
-                this.buttonIsActiveNext = true
+                this.paginate.buttonIsDisabledNext = false
+                this.paginate.buttonIsActiveNext = true
                 return false
             } else {
-                this.buttonIsActiveNext = false
+                this.paginate.buttonIsDisabledNext = true
                 return true
             }
         },
         isDisabledPrev() {
             if (this.users.links.prev) {
-                this.buttonIsActivePrev = true
+                this.paginate.buttonIsDisabledPrev = false
+                this.paginate.buttonIsActivePrev = true
                 return false
             } else {
-                this.buttonIsActivePrev = false
+                this.paginate.buttonIsDisabledPrev = true
                 return true
             }
         }
