@@ -24,11 +24,11 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="({ name, created_at, updated_at}, index) in users" :key="index">
+                <tr v-for="({ name, created_at, updated_at}, index) in sortedUsers" :key="index">
                 <th scope="row">{{index + 1}}</th>
                 <td>{{ name }}</td>
-                <td>{{ created_at.date }}</td>
-                <td>{{ updated_at.date }}</td>
+                <td>{{ created_at.date | dateFilter }} <span class="mb-1 text-muted">{{ created_at.date | datefromNow }}</span></td>
+                <td>{{ updated_at.date | dateFilter }} <span class="mb-1 text-muted">{{ updated_at.date | datefromNow }}</span></td>
                 </tr>
             </tbody>
         </table>
@@ -45,7 +45,9 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from 'axios'
+import Lodash from 'lodash'
+import moment from 'moment'
 
 export default {
     data() {
@@ -67,12 +69,25 @@ export default {
                 .then(response => {
                     this.loading = false
                     this.users = response.data.data
-                    console.log(response.data)
                 }).catch(error => {
                     this.loading = false
                     this.error = error.response.data.message
-                });
+                }); 
         }
+    },
+    computed: {
+        sortedUsers() {
+            return _.orderBy(this.users, 'name')
+        }
+    },
+    filters: {
+        dateFilter(date) {
+            return moment(date).format('MM/DD/YYYY')
+        },
+        datefromNow(date) {
+            return moment(date).fromNow()
+        }
+        
     }
 }
 </script>
