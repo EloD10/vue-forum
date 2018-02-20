@@ -26,7 +26,7 @@ You can launch the server with `php artisan serve`. You can see existing routes 
 
 Now, you need to run the frontend : 
 ```
-npm run hot # or yarn watch
+npm run watch # or yarn watch
 ```
 
 Enjoy!  :sunglasses:
