@@ -15225,14 +15225,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this.error = error.response.data.message;
             });
         },
-        loadMore: function loadMore() {
+        goToNext: function goToNext() {
             var _this2 = this;
 
             __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(this.users.links.next).then(function (response) {
                 _this2.users = response.data;
             });
         },
-        loadBack: function loadBack() {
+        goToBack: function goToBack() {
             var _this3 = this;
 
             __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(this.users.links.prev).then(function (response) {
@@ -16173,132 +16173,143 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _vm.loading
-      ? _c("div", { staticClass: "loading" }, [
-          _vm._v("\n        Loading...\n    ")
-        ])
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.error
-      ? _c("div", [
-          _c("p", [_vm._v(_vm._s(_vm.error))]),
-          _vm._v(" "),
-          _c("p", [
-            _c(
-              "button",
-              {
-                on: {
-                  click: function($event) {
-                    $event.preventDefault()
-                    _vm.fetchData($event)
-                  }
-                }
-              },
-              [_vm._v("\n                Try Again\n            ")]
-            )
+  return _c(
+    "div",
+    {
+      staticClass: "bg-white pb-2 rounded",
+      staticStyle: { "box-shadow": "0 0 2em rgb( 219, 219, 219)" }
+    },
+    [
+      _vm.loading
+        ? _c("div", { staticClass: "loading" }, [
+            _vm._v("\n        Loading...\n    ")
           ])
-        ])
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.users
-      ? _c("table", { staticClass: "table table-striped" }, [
-          _vm._m(0),
-          _vm._v(" "),
-          _c(
-            "tbody",
-            _vm._l(_vm.sortedUsers, function(ref, index) {
-              var name = ref.name
-              var created_at = ref.created_at
-              var updated_at = ref.updated_at
-              return _c("tr", { key: index }, [
-                _c("th", { attrs: { scope: "row" } }, [
-                  _vm._v(_vm._s(index + 1))
-                ]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(name))]),
-                _vm._v(" "),
-                _c("td", [
-                  _vm._v(_vm._s(_vm._f("dateFilter")(created_at.date)) + " "),
-                  _c("span", { staticClass: "mb-1 text-muted" }, [
-                    _vm._v(_vm._s(_vm._f("datefromNow")(created_at.date)))
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("td", [
-                  _vm._v(_vm._s(_vm._f("dateFilter")(updated_at.date)) + " "),
-                  _c("span", { staticClass: "mb-1 text-muted" }, [
-                    _vm._v(_vm._s(_vm._f("datefromNow")(updated_at.date)))
-                  ])
-                ])
-              ])
-            })
-          )
-        ])
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.users
-      ? _c("nav", [
-          _c("ul", { staticClass: "pagination mt-2 justify-content-center" }, [
-            _c(
-              "li",
-              {
-                class: {
-                  "page-item": _vm.paginate.buttonIsActivePrev,
-                  "page-item disabled": _vm.paginate.buttonIsDisabledPrev
-                }
-              },
-              [
-                _vm.users
-                  ? _c(
-                      "button",
-                      {
-                        staticClass: "page-link",
-                        attrs: { disabled: _vm.isDisabledPrev },
-                        on: {
-                          click: function($event) {
-                            $event.preventDefault()
-                            _vm.loadBack($event)
-                          }
-                        }
-                      },
-                      [_vm._v("Prev")]
-                    )
-                  : _vm._e()
-              ]
-            ),
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.error
+        ? _c("div", [
+            _c("p", [_vm._v(_vm._s(_vm.error))]),
+            _vm._v(" "),
+            _c("p", [
+              _c(
+                "button",
+                {
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      _vm.fetchData($event)
+                    }
+                  }
+                },
+                [_vm._v("\n                Try Again\n            ")]
+              )
+            ])
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.users
+        ? _c("table", { staticClass: "table table-striped border-bottom" }, [
+            _vm._m(0),
             _vm._v(" "),
             _c(
-              "li",
-              {
-                class: {
-                  "page-item": _vm.paginate.buttonIsActiveNext,
-                  "page-item disabled": _vm.paginate.buttonIsDisabledNext
-                }
-              },
+              "tbody",
+              _vm._l(_vm.sortedUsers, function(ref, index) {
+                var name = ref.name
+                var created_at = ref.created_at
+                var updated_at = ref.updated_at
+                return _c("tr", { key: index }, [
+                  _c("th", { attrs: { scope: "row" } }, [
+                    _vm._v(_vm._s(index + 1))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(name))]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _vm._v(_vm._s(_vm._f("dateFilter")(created_at.date)) + " "),
+                    _c("span", { staticClass: "mb-1 text-muted" }, [
+                      _vm._v(_vm._s(_vm._f("datefromNow")(created_at.date)))
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _vm._v(_vm._s(_vm._f("dateFilter")(updated_at.date)) + " "),
+                    _c("span", { staticClass: "mb-1 text-muted" }, [
+                      _vm._v(_vm._s(_vm._f("datefromNow")(updated_at.date)))
+                    ])
+                  ])
+                ])
+              })
+            )
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.users
+        ? _c("nav", [
+            _c(
+              "ul",
+              { staticClass: "pagination mt-2 justify-content-center" },
               [
-                _vm.users
-                  ? _c(
-                      "button",
-                      {
-                        staticClass: "page-link",
-                        attrs: { disabled: _vm.isDisabledNext },
-                        on: {
-                          click: function($event) {
-                            $event.preventDefault()
-                            _vm.loadMore($event)
-                          }
-                        }
-                      },
-                      [_vm._v("Next")]
-                    )
-                  : _vm._e()
+                _c(
+                  "li",
+                  {
+                    class: {
+                      "page-item": _vm.paginate.buttonIsActivePrev,
+                      "page-item disabled": _vm.paginate.buttonIsDisabledPrev
+                    }
+                  },
+                  [
+                    _vm.users
+                      ? _c(
+                          "button",
+                          {
+                            staticClass: "page-link",
+                            attrs: { disabled: _vm.isDisabledPrev },
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                _vm.goToBack($event)
+                              }
+                            }
+                          },
+                          [_vm._v("Prev")]
+                        )
+                      : _vm._e()
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "li",
+                  {
+                    class: {
+                      "page-item": _vm.paginate.buttonIsActiveNext,
+                      "page-item disabled": _vm.paginate.buttonIsDisabledNext
+                    }
+                  },
+                  [
+                    _vm.users
+                      ? _c(
+                          "button",
+                          {
+                            staticClass: "page-link",
+                            attrs: { disabled: _vm.isDisabledNext },
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                _vm.goToNext($event)
+                              }
+                            }
+                          },
+                          [_vm._v("Next")]
+                        )
+                      : _vm._e()
+                  ]
+                )
               ]
             )
           ])
-        ])
-      : _vm._e()
-  ])
+        : _vm._e()
+    ]
+  )
 }
 var staticRenderFns = [
   function() {

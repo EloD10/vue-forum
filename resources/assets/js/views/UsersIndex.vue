@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="bg-white pb-2 rounded" style="box-shadow: 0 0 2em rgb( 219, 219, 219);">
         <div class="loading" v-if="loading">
             Loading...
         </div>
@@ -14,7 +14,7 @@
             </p>
         </div>
 
-        <table v-if="users" class="table table-striped">
+        <table v-if="users" class="table table-striped border-bottom">
             <thead>
                 <tr>
                 <th scope="col">#</th>
@@ -36,10 +36,10 @@
         <nav v-if="users">
             <ul class="pagination mt-2 justify-content-center">
             <li :class="{'page-item': paginate.buttonIsActivePrev, 'page-item disabled': paginate.buttonIsDisabledPrev}">
-                <button v-if="users" @click.prevent="loadBack" class="page-link" :disabled="isDisabledPrev">Prev</button>
+                <button v-if="users" @click.prevent="goToBack" class="page-link" :disabled="isDisabledPrev">Prev</button>
             </li>
             <li :class="{'page-item': paginate.buttonIsActiveNext, 'page-item disabled': paginate.buttonIsDisabledNext}">
-                <button v-if="users" @click.prevent="loadMore" class="page-link" :disabled="isDisabledNext">Next</button>
+                <button v-if="users" @click.prevent="goToNext" class="page-link" :disabled="isDisabledNext">Next</button>
             </li>
             </ul>
         </nav>
@@ -83,14 +83,14 @@ export default {
                     this.error = error.response.data.message
                 })
         },
-        loadMore() {
+        goToNext() {
             axios
                 .get(this.users.links.next)
                 .then(response => {
                     this.users = response.data
                 })
             },
-        loadBack() {
+        goToBack() {
             axios
                 .get(this.users.links.prev)
                 .then(response => {
