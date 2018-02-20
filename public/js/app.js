@@ -15184,7 +15184,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 
@@ -15195,7 +15194,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             loading: false,
             users: null,
-            error: null
+            error: null,
+            buttonIsActivePrev: false,
+            buttonIsActiveNext: false
         };
     },
     created: function created() {
@@ -15210,16 +15211,48 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.loading = true;
             __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('/api/users').then(function (response) {
                 _this.loading = false;
-                _this.users = response.data.data;
+                _this.users = response.data;
             }).catch(function (error) {
                 _this.loading = false;
                 _this.error = error.response.data.message;
+            });
+        },
+        loadMore: function loadMore() {
+            var _this2 = this;
+
+            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(this.users.links.next).then(function (response) {
+                _this2.users = response.data;
+            });
+        },
+        loadBack: function loadBack() {
+            var _this3 = this;
+
+            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(this.users.links.prev).then(function (response) {
+                _this3.users = response.data;
             });
         }
     },
     computed: {
         sortedUsers: function sortedUsers() {
-            return _.orderBy(this.users, 'name');
+            return _.orderBy(this.users.data, 'name');
+        },
+        isDisabledNext: function isDisabledNext() {
+            if (this.users.links.next) {
+                this.buttonIsActiveNext = true;
+                return false;
+            } else {
+                this.buttonIsActiveNext = false;
+                return true;
+            }
+        },
+        isDisabledPrev: function isDisabledPrev() {
+            if (this.users.links.prev) {
+                this.buttonIsActivePrev = true;
+                return false;
+            } else {
+                this.buttonIsActivePrev = false;
+                return true;
+            }
         }
     },
     filters: {
@@ -16194,7 +16227,45 @@ var render = function() {
         ])
       : _vm._e(),
     _vm._v(" "),
-    _vm._m(1)
+    _vm.users
+      ? _c("nav", [
+          _c("ul", { staticClass: "pagination mt-2 justify-content-center" }, [
+            _vm.users
+              ? _c(
+                  "button",
+                  {
+                    class: { "page-link": _vm.buttonIsActivePrev },
+                    attrs: { disabled: _vm.isDisabledPrev },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        _vm.loadBack($event)
+                      }
+                    }
+                  },
+                  [_vm._v("Prev")]
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.users
+              ? _c(
+                  "button",
+                  {
+                    class: { "page-link": _vm.buttonIsActiveNext },
+                    attrs: { disabled: _vm.isDisabledNext },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        _vm.loadMore($event)
+                      }
+                    }
+                  },
+                  [_vm._v("Next")]
+                )
+              : _vm._e()
+          ])
+        ])
+      : _vm._e()
   ])
 }
 var staticRenderFns = [
@@ -16211,32 +16282,6 @@ var staticRenderFns = [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Created at")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Updated at")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("nav", [
-      _c("ul", { staticClass: "pagination mt-2 justify-content-center" }, [
-        _c("li", { staticClass: "page-item" }, [
-          _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
-            _vm._v("Previous")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", { staticClass: "page-item" }, [
-          _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
-            _vm._v("1")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", { staticClass: "page-item" }, [
-          _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
-            _vm._v("Next")
-          ])
-        ])
       ])
     ])
   }

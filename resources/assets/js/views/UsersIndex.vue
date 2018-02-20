@@ -33,11 +33,10 @@
             </tbody>
         </table>
 
-        <nav>
+        <nav v-if="users">
             <ul class="pagination mt-2 justify-content-center">
-                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                <button v-if="users" @click.prevent="loadBack" :class="{'page-link': buttonIsActivePrev}" :disabled="isDisabledPrev">Prev</button>
+                <button v-if="users" @click.prevent="loadMore" :class="{'page-link': buttonIsActiveNext}" :disabled="isDisabledNext">Next</button>
             </ul>
         </nav>
 
@@ -55,6 +54,8 @@ export default {
             loading: false,
             users: null,
             error: null,
+            buttonIsActivePrev: false,
+            buttonIsActiveNext: false
         };
     },
     created() {
@@ -68,16 +69,48 @@ export default {
                 .get('/api/users')
                 .then(response => {
                     this.loading = false
-                    this.users = response.data.data
+                    this.users = response.data
                 }).catch(error => {
                     this.loading = false
                     this.error = error.response.data.message
-                }); 
-        }
+                })
+        },
+        loadMore() {
+            axios
+                .get(this.users.links.next)
+                .then(response => {
+                    this.users = response.data
+                })
+            },
+        loadBack() {
+            axios
+                .get(this.users.links.prev)
+                .then(response => {
+                    this.users = response.data
+                })
+            }
     },
     computed: {
         sortedUsers() {
-            return _.orderBy(this.users, 'name')
+            return _.orderBy(this.users.data, 'name')
+        },
+        isDisabledNext() {
+            if (this.users.links.next) {
+                this.buttonIsActiveNext = true
+                return false
+            } else {
+                this.buttonIsActiveNext = false
+                return true
+            }
+        },
+        isDisabledPrev() {
+            if (this.users.links.prev) {
+                this.buttonIsActivePrev = true
+                return false
+            } else {
+                this.buttonIsActivePrev = false
+                return true
+            }
         }
     },
     filters: {
