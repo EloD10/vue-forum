@@ -45,7 +45,7 @@
                 <button :disabled="! lastPage" @click.prevent="goToLast" class="page-link">Last</button>
             </li>
             </ul>
-            <div class="mb-1 text-muted">{{ paginatonCount }}</div>
+            <div class="mb-1 text-muted d-flex justify-content-center">{{ paginatonCount }}</div>
         </nav>
     </div>
 </template>
