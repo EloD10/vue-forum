@@ -13,7 +13,7 @@ cd laravelforum
 ```
 
 Setup your connection database in `.env`.
-And don't forget to generate a new encryption key with this command: php artisan key:generate Copy and paste this new key to APP_KEY= in line 3 to the env. file.
+And don't forget to generate a new encryption key with this command: `php artisan key:generate` Copy and paste this new key to `APP_KEY=` in `env.` file.
 
 Follow these commands :
 
